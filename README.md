@@ -1,5 +1,5 @@
 # Mayan-EDMS-OpenRedirect-POC
-Mayan EDMS – Open Redirect Vulnerability (Unauthenticated)
+Mayan EDMS – Open Redirect Vulnerability Unauthenticated, Version 4.10(latest)
 
 
 An unauthenticated Open Redirect vulnerability was discovered in Mayan EDMS.
