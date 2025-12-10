@@ -39,12 +39,7 @@ Root Cause (Vulnerable Code)
 
 The vulnerable DOM logic is located in the primary template used for navigation handling:
 
-if (typeof partialNavigation === 'undefined') {
-    document.write('<script type="text/undefined">')
-    const currentLocation = '#' + window.location.pathname + window.location.search;
-    const url = new URL(currentLocation, window.location.origin)
-    window.location = url;
-}
+<script> if (typeof partialNavigation === 'undefined') { document.write('<script type="text/undefined">') const currentLocation = '#' + window.location.pathname + window.location.search; const url = new URL(currentLocation, window.location.origin) window.location = url; } </script>
 
 
 window.location.hash (fully attacker-controlled) is appended to the application’s navigation logic and executed without sanitization → redirect to external domain.
