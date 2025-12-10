@@ -1,4 +1,4 @@
-# Mayan-EDMS-OpenRedirect-POC
+
 Mayan EDMS – Open Redirect Vulnerability Unauthenticated, Version 4.10(latest)
 
 
@@ -13,7 +13,7 @@ This issue occurs due to insecure handling of window.location inside client-side
 Affected Endpoints
 
 The following URLs are vulnerable to Open Redirect via the hash fragment (#) and/or the next parameter, allowing attackers to specify an arbitrary external target:
-
+```
 http://192.168.138.108/authentication/login/#https://evil.com
 
 http://192.168.138.108/authentication/password/reset/#https://evil.com
@@ -32,14 +32,14 @@ http://192.168.138.108/authentication/login/?next=/search/advanced/%3F_search_mo
 
 http://192.168.138.108/authentication/login/?next=/search/advanced/%3F_search_model_pk%3D/#https://evil.com
 
-
+```
 All endpoints behave the same because they rely on the same vulnerable JavaScript fragment.
 
 Root Cause (Vulnerable Code)
 
 The vulnerable DOM logic is located in the primary template used for navigation handling:
-
+```
 <script> if (typeof partialNavigation === 'undefined') { document.write('<script type="text/undefined">') const currentLocation = '#' + window.location.pathname + window.location.search; const url = new URL(currentLocation, window.location.origin) window.location = url; } </script>
-
+```
 
 window.location.hash (fully attacker-controlled) is appended to the application’s navigation logic and executed without sanitization → redirect to external domain.
